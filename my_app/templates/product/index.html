@@ -7,8 +7,8 @@
         <h3>
             <a href="{{ url_for('product.show', id = product.id) }}">{{ product['name'] }}</a>
         </h3>
-        <a class="btn btn-success btn-sm" href="{{ url_for('product.update', id = product.id) }}">Editar</a>
-        <button data-toggle="modal" data-target="#deleteModal" data-name="{{ product['name'] }}" data-id="{{ product['id'] }}" class="btn btn-danger btn-sm" href="{{ url_for('product.delete', id = product.id) }}">Eliminar</button>
+        <a class="btn btn-success btn-sm" href="{{ url_for('product.update', id = product.id) }}"><i  class="far fa-edit" data-toggle="tooltip" data-placement="top" title="Editar" ></i></a>
+        <button  data-toggle="modal" data-target="#deleteModal" data-name="{{ product['name'] }}" data-id="{{ product['id'] }}" class="btn btn-danger btn-sm" href="{{ url_for('product.delete', id = product.id) }}"><i  class="far fa-trash-alt" data-toggle="tooltip" data-placement="top" title="Eliminar producto {{ product['name'] }} ?"></i></button>
     </div>
     {% endfor %}
 </div>
