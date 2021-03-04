@@ -1,0 +1,22 @@
+<h3>{{ product['name'] }}</h3>
+<p>{{ product['category'] }}</p>
+{% if product.price %}
+    <p>{{ product['price'] }}</p>
+{% else %}    
+    <p>Filtro default: {{ product['price'] | default('Sin precio', True) }}</p>
+{% endif %}    
+
+{{ "<h1>Hola Mundo</h1>" | safe }}
+{{ "Esto es la descripcion de un producto" | truncate(10) }}
+<p></p>
+{{ "Esto es la descripcion de un producto" | count }}
+<p>{{ "70.7" | float }}</p>
+<p>{{ "70.7" | int }}</p>
+<p>{{ 3.1415926535 | round(2) }}</p>
+<p>{{ ["iphone", "ipad"] | join(", ")}}</p>
+<p>{{ ["iphone", "ipad"] | length }}</p>
+
+<p>{{ {'offer': False, 'price': 50.5, 'k': 45} | tojson }}</p>
+
+<p>{{ 70 | mydouble }}</p>
+<p>{{ product | iva }}</p>

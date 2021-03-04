@@ -1,0 +1,9 @@
+{% extends 'layout/base.html' %} {% block container %}
+
+<form action="{{ url_for('category.create') }}" method="POST">
+    {% include 'category/_form.html' %}
+    <input type="submit" class="btn btn-dark" value="Enviar">
+</form>
+
+
+{% endblock %}
