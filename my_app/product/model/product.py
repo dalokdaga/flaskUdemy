@@ -4,6 +4,7 @@ from decimal import Decimal
 from flask_wtf import FlaskForm
 from wtforms import StringField,DecimalField
 from wtforms.validators import InputRequired, NumberRange
+from wtforms.fields import SelectField
 class Product(db.Model):
     __tablename__ = 'products'
     id = db.Column(db.Integer, primary_key= True)
@@ -23,3 +24,4 @@ class Product(db.Model):
 class ProductForm(FlaskForm):
     name = StringField('Nombre', validators=[InputRequired()])
     price = DecimalField('Precio', validators= [InputRequired(),NumberRange(min=Decimal('0.0'))])
+    category_id = SelectField('Categoría', coerce=int)

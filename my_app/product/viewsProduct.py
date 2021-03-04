@@ -1,6 +1,7 @@
 from flask import Blueprint, render_template
 from .model.products import PRODUCTS
 from my_app.product.model.product import Product, ProductForm
+from my_app.product.model.category import Category
 from sqlalchemy.sql.expression import not_, or_
 from my_app import db
 from flask import request,flash,get_flashed_messages
@@ -40,8 +41,12 @@ def delete(id):
 def create():
    #form = ProductForm(meta={'csrf':Flase})
    form = ProductForm()
+   ##obtenemos todas las categorias para llenar el campo de selección
+   categories = [ (c.id, c.name) for c in Category.query.all()]
+   form.category_id.choices = categories
+   ####
    if form.validate_on_submit():  
-      p = Product(request.form['name'],request.form['price'])
+      p = Product(request.form['name'],request.form['price'],request.form['category_id'])
       db.session.add(p)
       db.session.commit()    
       flash("Producto creado con exito")      
@@ -113,13 +118,17 @@ def edit(id):
 def update(id): 
    product = Product.query.get_or_404(id)  
    form = ProductForm()
+   categories = [ (c.id, c.name) for c in Category.query.all()]   
+   form.category_id.choices = categories   
+   print(categories)
    if request.method == 'GET':   
       form.name.data = product.name
       form.price.data = product.price
-
+      form.category_id.data = product.category_id
    if form.validate_on_submit():    
       product.name = form.name.data
-      product.price = form.price.data   
+      product.price = form.price.data 
+      product.category_id = form.category_id.data  
       db.session.add(product)
       db.session.commit()    
       flash("Producto actulizado con exito") 

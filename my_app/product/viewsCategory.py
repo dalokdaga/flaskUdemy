@@ -68,6 +68,7 @@ def edit(id):
 def update(id): 
    category = Category.query.get_or_404(id)  
    form = CategoryForm()
+   print(category.products.first())
    if request.method == 'GET':   
       form.name.data = category.name
 
