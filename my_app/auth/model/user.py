@@ -10,6 +10,7 @@ from werkzeug.security import generate_password_hash,check_password_hash
 from sqlalchemy import Enum
 import enum
 
+###esto es una prueba para el git
 class RolUser(enum.Enum):
     regular = 1
     admin = 6
