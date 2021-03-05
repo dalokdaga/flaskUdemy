@@ -3,7 +3,7 @@ from my_app import db
 from decimal import Decimal
 from flask_wtf import FlaskForm
 from wtforms import StringField,PasswordField
-from wtforms.validators import InputRequired, NumberRange
+from wtforms.validators import InputRequired, NumberRange, EqualTo
 from my_app.product.model.product import Product
 
 from werkzeug.security import generate_password_hash,check_password_hash
@@ -31,10 +31,17 @@ class User(db.Model):
         return '<Usuario %r>' % (self.username)
     
     def check_password(self,password):
-        return check_password_hash(self.pwhash,password)
+        return check_password_hash(self.pwhash,password)        
 
-class UserForm(FlaskForm):
+class LoginForm(FlaskForm):
     username = StringField('Usuario', validators=[InputRequired()])
-    password = PasswordField('Contraseña', validators=[InputRequired()])
+    password = PasswordField('Password', validators=[InputRequired()])
 
-    
+class RegisterForm(FlaskForm):
+    username = StringField('Usuario', validators=[InputRequired()])
+    password = PasswordField('Repetir Password', validators=[InputRequired(),  EqualTo('confirm', message='Passwords must match')])
+    confirm  = PasswordField('Repeat Password') 
+
+class ChangePassword( FlaskForm):
+    password = PasswordField('New Password', [InputRequired(), EqualTo('confirm', message='Passwords must match')])
+    confirm  = PasswordField('Repeat Password')    

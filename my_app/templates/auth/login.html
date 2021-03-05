@@ -1,6 +1,6 @@
-
 {% extends 'layout/base.html' %} {% block container %}
-<form action="{{ url_for('auth.register') }}" method="POST">
+
+<form action="{{ url_for('auth.login') }}" method="POST">
     <div class="form-group">
         {{ form.username.label }} 
         {{ form.username(class="form-control") }}
@@ -10,10 +10,6 @@
         {{ form.password.label }} 
         {{ form.password(class="form-control") }}
     </div>
-    <div class="form-group">
-        {{ form.confirm.label }} 
-        {{ form.confirm(class="form-control") }}
-    </div>    
     <input type="submit" class="btn btn-dark" value="Enviar">
 </form>
 
