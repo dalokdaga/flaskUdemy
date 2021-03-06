@@ -1,7 +1,7 @@
 from flask import Blueprint, render_template
 from my_app.product.model.category import Category,CategoryForm
 from sqlalchemy.sql.expression import not_, or_
-from my_app import db
+from my_app import db,rol_admin_need
 from flask import request,flash,get_flashed_messages
 from flask import abort, redirect, url_for
 from flask_login import login_required
@@ -11,6 +11,7 @@ category =  Blueprint('category',__name__)
 
 @category.before_request
 @login_required
+@rol_admin_need
 def constructor():
    pass
 

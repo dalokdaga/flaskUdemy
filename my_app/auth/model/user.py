@@ -12,8 +12,8 @@ import enum
 
 ###esto es una prueba para el git
 class RolUser(enum.Enum):
-    regular = 1
-    admin = 6
+    regular = "regular"
+    admin = "admin"
 
 class User(db.Model):
     __tablename__ = 'users'
