@@ -2,7 +2,7 @@ from sqlalchemy import Column, Integer, String
 from my_app import db
 from decimal import Decimal
 from flask_wtf import FlaskForm
-from wtforms import StringField,PasswordField
+from wtforms import StringField,PasswordField,HiddenField
 from wtforms.validators import InputRequired, NumberRange, EqualTo
 from my_app.product.model.product import Product
 
@@ -51,6 +51,7 @@ class User(db.Model):
 class LoginForm(FlaskForm):
     username = StringField('Usuario', validators=[InputRequired()])
     password = PasswordField('Password', validators=[InputRequired()])
+    next = HiddenField('next')
 
 class RegisterForm(FlaskForm):
     username = StringField('Usuario', validators=[InputRequired()])

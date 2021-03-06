@@ -6,9 +6,16 @@ from sqlalchemy.sql.expression import not_, or_
 from my_app import db
 from flask import request,flash,get_flashed_messages
 from flask import abort, redirect, url_for
+from flask_login import login_required
 #from werkzeug import abort
 
 product =  Blueprint('product',__name__)
+
+@product.before_request
+@login_required
+def constructor():
+   pass
+
 @product.route('/')
 @product.route('/home/<int:page>')
 def index(page = 1):
@@ -119,8 +126,7 @@ def update(id):
    product = Product.query.get_or_404(id)  
    form = ProductForm()
    categories = [ (c.id, c.name) for c in Category.query.all()]   
-   form.category_id.choices = categories   
-   print(categories)
+   form.category_id.choices = categories      
    if request.method == 'GET':   
       form.name.data = product.name
       form.price.data = product.price

@@ -10,8 +10,15 @@
         {{ form.password.label }} 
         {{ form.password(class="form-control") }}
     </div>
+    {{ form.next() }}
     <input type="submit" class="btn btn-dark" value="Enviar">
 </form>
 
+<script>
+    var params = new URLSearchParams(window.location.search)
+    if(params.has("next"))
+        document.getElementById("next").value = params.get("next")
+    console.log( document.getElementById("next").value)    
+</script>
 
 {% endblock %}

@@ -3,7 +3,8 @@ from flask import request,flash,get_flashed_messages
 from flask import abort, redirect, url_for, session
 from my_app import db
 from my_app.auth.model.user import RegisterForm, LoginForm, User
-
+#from flask import abort
+#from werkzeug import abort
 from flask_login import login_user,logout_user,current_user,login_required
 from my_app import login_manager
 
@@ -50,8 +51,14 @@ def login():
       if user and user.check_password(form.password.data):
          #registramos la sesion
          login_user(user)
-         flash("Bienvenido de nuevo " + user.username)      
-         return redirect(url_for('product.index'))
+         flash("Bienvenido de nuevo " + user.username)
+         next = request.form['next']
+         print(next)
+         # is_safe_url should check if the url is safe for redirects.
+         # See http://flask.pocoo.org/snippets/62/ for an example.
+         #if not is_safe_url(next):
+         #      return flask.abort(400)       
+         return redirect(next or url_for('product.index'))
       else:   
          flash("Usuario o contraseña incorrectos")      
 

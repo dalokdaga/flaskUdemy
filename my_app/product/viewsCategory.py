@@ -4,9 +4,17 @@ from sqlalchemy.sql.expression import not_, or_
 from my_app import db
 from flask import request,flash,get_flashed_messages
 from flask import abort, redirect, url_for
+from flask_login import login_required
 #from werkzeug import abort
 
 category =  Blueprint('category',__name__)
+
+@category.before_request
+@login_required
+def constructor():
+   pass
+
+
 @category.route('/category')
 @category.route('/category/<int:page>')
 def index(page = 1):
@@ -67,8 +75,7 @@ def edit(id):
 @category.route('/category-update/<int:id>', methods=['GET','POST'])
 def update(id): 
    category = Category.query.get_or_404(id)  
-   form = CategoryForm()
-   print(category.products.first())
+   form = CategoryForm()   
    if request.method == 'GET':   
       form.name.data = category.name
 
