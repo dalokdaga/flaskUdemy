@@ -6,7 +6,7 @@
 
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">                      
-            {% if session['username'] %}
+            {% if current_user.is_authenticated %}
                 <li class="nav-item active">
                     <a class="nav-link" href="{{ url_for('product.index') }}">Home <span class="sr-only">(current)</span></a>
                 </li>
@@ -23,21 +23,21 @@
         </ul>
 
         <ul class="navbar-nav">            
-            {% if session['username'] %}
+            {% if current_user.is_authenticated %}
             {% else %}
                 <li class="nav-item ">
-                    <a class="nav-link" href="{{ url_for('auth.login') }}">Login </a>
+                    <a class="nav-link" href="{{ url_for('fauth.login') }}">Login </a>
                 </li>    
             {% endif %}
 
-            {% if session['username'] %}
+            {% if current_user.is_authenticated %}
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                      Hola: {{ session['username'] }}
+                      Hola: {{ current_user.username }}
                     </a>
                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                         <a class="dropdown-item" href="#">Perfil </a>
-                        <a class="dropdown-item" href="{{ url_for('auth.logout') }}">Logout </a>
+                        <a class="dropdown-item" href="{{ url_for('fauth.logout') }}">Logout </a>
                     </div>
                 </li>
             {% endif %}            

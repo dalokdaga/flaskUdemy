@@ -22,6 +22,21 @@ class User(db.Model):
     pwhash = db.Column(db.String(300))
     rol = db.Column(Enum(RolUser))
 
+    @property        
+    def is_authenticated(self):
+        return True
+
+    @property
+    def is_active(self):
+        return True
+
+    @property
+    def is_anonymous(self):
+        return False
+    
+    def get_id(self):
+        return str(self.id)            
+
     def __init__(self, username, pwhash, rol = RolUser.regular):
         self.username = username        
         self.pwhash = generate_password_hash(pwhash)
