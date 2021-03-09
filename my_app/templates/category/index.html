@@ -1,4 +1,6 @@
-{% extends 'layout/base.html' %} {% from 'macro/_pagination.html' import m_pagination %} {% block container %}
+{% extends 'layout/base.html' %}
+{% from 'macro/_pagination.html' import m_pagination %} 
+{% block container %}
 <a href="{{ url_for('category.create')}}" class="btn btn-primary mt-2 mb-2"><i class="fa fa-plus"></i>Crear</a>
 <br>
 <div class="list-category">
