@@ -12,13 +12,13 @@ class CategoryApi(MethodView):
         categories = Category.query.all()
         if id:
             category = Category.query.get(id)
-            res = categoryToJson(category)
-
+            if not category:
+                return sendResJson(None,"No existe categoria",403)
+            res = categoryToJson(category)            
         else:                
             res = []
             for p in categories:
-                res.append(categoryToJson(p))
-
+                res.append(categoryToJson(p))                                            
         return sendResJson(res,None,200)
 
     def post(self):

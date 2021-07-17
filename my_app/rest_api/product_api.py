@@ -13,6 +13,8 @@ class ProductApi(MethodView):
         products = Product.query.all()
         if id:
             product = Product.query.get(id)
+            if not product:
+                return sendResJson(None,"No existe producto",403)
             res = productToJson(product)
 
         else:                
@@ -24,16 +26,16 @@ class ProductApi(MethodView):
 
     def post(self):
         if not request.form:
-            return sendResJson(None,"sin parámetros",403)
+            return sendResJson(None,"sin parametros",403)
         
         #validaciones nombre
         if not "name" in request.form:
-            return sendResJson(None,"sin parámetros nombre",403)            
+            return sendResJson(None,"sin parametros nombre",403)            
         if len(request.form['name']) < 3:
             return sendResJson(None,"Nombre no valido",403) 
         #validaciones precio
         if not "price" in request.form:
-            return sendResJson(None,"sin parámetros precio",403)                    
+            return sendResJson(None,"sin parametros precio",403)                    
         try:
            float(request.form['price'])
         except ValueError:
@@ -68,7 +70,7 @@ class ProductApi(MethodView):
             return sendResJson(None,"Nombre no valido",403) 
         #validaciones precio
         if not "price" in request.form:
-            return sendResJson(None,"sin parámetros precio",403)                    
+            return sendResJson(None,"sin parametros precio",403)                    
         try:
            float(request.form['price'])
         except ValueError:
